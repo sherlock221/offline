@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html manifest="cache/offline.appcache">
+<head lang="zh-cn">
+
+    <!-- 基本配置信息 -->
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="renderer" content="webkit">
+
+
+    <!--标题-->
+    <title>离线应用展示</title>
+
+
+
+</head>
+<body>
+
+<img  src="images/test01.jpg" width="200" height="200">
+<img  src="images/test02.jpg" width="200" height="200">
+<img  src="images/test03.jpg" width="200" height="200">
+
+</body>
+
+</html>
+<script type="text/javascript" src="js/offline_app.js"></script>
+<script type="text/javascript">
+    var  cahce =  new appCache();
+    console.log("dd");
+    cahce.complete(function(){
+        console.log("88");
+    });
+</script>
