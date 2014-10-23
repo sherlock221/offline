@@ -11,8 +11,8 @@
     var  appCache = function(css){
 
         if(css){
-             this.css.background = css.background  ==  undefined ?  this.css.background : css.background;
-             this.css.borderColor = css.borderColor  ==  undefined ?  this.css.borderColor : css.borderColor;
+            this.css.background = css.background  ==  undefined ?  this.css.background : css.background;
+            this.css.borderColor = css.borderColor  ==  undefined ?  this.css.borderColor : css.borderColor;
         }
 
         var style = document.createElement('style');
@@ -59,6 +59,7 @@
                 me._updateend(e);
                 me._end(e);
                 window.applicationCache.swapCache();
+
                 if(me.auto){
                     window.location.reload();
                 }
@@ -77,21 +78,33 @@
         }
 
         var checkFn = function(){
+
             setLoadingContent("检查缓存中...");
         }
 
-        var noupdateFn = function(){
+        var noupdateFn = function(e){
             setLoadingContent("读取缓存...");
+            me._end(e);
         }
 
         var  cachedFn = function(e){
+
             me._loadDom.style.display = 'none';
             me._addEnd(e)
             me._end(e);
         }
 
         var errorFn = function(e){
-            setLoadingContent("异常...");
+            console.log(e);
+            var message;
+            if(e.status == "404"){
+                message = "资源出现404";
+            }
+            else{
+                message  = e.message;
+            }
+            alert(message);
+            me._loadDom.style.display = 'none';
             me._error_fn(e);
             return false;
         }
@@ -100,6 +113,7 @@
             setLoadingContent("缓存被取消...");
             return false;
         }
+
         window.applicationCache.addEventListener('checking',checkFn, false);
         window.applicationCache.addEventListener('downloading',downloadingFn, false);
         window.applicationCache.addEventListener('progress',progressFn, false);
@@ -108,6 +122,7 @@
         window.applicationCache.addEventListener('obsolete',obsoleteFn, false);
         window.applicationCache.addEventListener('noupdate',noupdateFn, false);
         window.applicationCache.addEventListener('cached',cachedFn, false);
+
     };
 
     appCache.prototype = {
@@ -123,19 +138,19 @@
             borderColor    : "#ffffff"
         },
 
-         progress: function(handler) {
-             if (typeof handler === 'function') {
-                 this._progress = handler;
-             }
-             return this;
-         },
+        progress: function(handler) {
+            if (typeof handler === 'function') {
+                this._progress = handler;
+            }
+            return this;
+        },
         //更新完成
-         updateend     : function(handler){
-             if (typeof handler === 'function') {
-                 this._updateend = handler;
-             }
-             return this;
-         },
+        updateend     : function(handler){
+            if (typeof handler === 'function') {
+                this._updateend = handler;
+            }
+            return this;
+        },
 
         //开始下载
         dowloadstart    : function(handler){
@@ -174,13 +189,13 @@
             return this;
         },
 
-         _updateend   : function(){},
-         _addEnd   : function(){},
-         _end  : function(){},
-         _progress : function(){},
-         _dowloadstart : function(){},
-         _error_fn  : function(){},
-         _obsolete  : function(){}
+        _updateend   : function(){},
+        _addEnd   : function(){},
+        _end  : function(){},
+        _progress : function(){},
+        _dowloadstart : function(){},
+        _error_fn  : function(){},
+        _obsolete  : function(){}
 
     };
     exports.appCache = appCache;

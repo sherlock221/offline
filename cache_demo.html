@@ -1,61 +1,77 @@
 <!DOCTYPE html>
-<html manifest="cache/offline.appcache">
+<html manifest="cache/offline.manifest">
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
 
+
+        <div id="message"></div>
 </body>
 
 
 <script type="text/javascript">
 
-    //检查manifest文件是否存在}
-    applicationCache.onchecking = function () {
-        console.log("检测manifest");
-    }
+    window.onload = function(){
 
-    //检查到有manifest或者manifest文件//已更新就执行下载操作//即使需要缓存的文件在请求时服务器已经返回过了
-    applicationCache.ondownloading = function () {
-        console.log("ondownloading");
-    }
-
-    //返回304表示没有更新，通知浏览器直接使用本地文件
-    applicationCache.onnoupdate = function () {
-        console.log("onnoupdate");
-    }
-
-    //下载的时候周期性的触发，可以通过它//获取已经下载的文件个数
-    applicationCache.onprogress = function () {
-        console.log("onprogress");
-
-    }
-
-
-    //下载结束后，表示缓存成功(manifest不存在时 首次触发)
-    applicationCache.oncached = function () {
-        console.log("oncached");
-
-    }
-    //第二次载入，如果manifest被更新//在下载结束时候触发//不触发onchched   alert("本地缓存正在更新中。。。");
-    applicationCache.onupdateready = function () {
-        console.log("onupdateready");
-
-        if (confirm("是否重新载入已更新文件")) {
-            applicationCache.swapCache();
-            location.reload();
+        //检查manifest文件是否存在}
+        applicationCache.onchecking = function () {
+            document.querySelector("#message").innerHTML += "检测manifes  <br/>  ";
+            console.log("检测manifest");
         }
-    }
 
-    //未找到文件，返回404或者401时候触发
-    applicationCache.onobsolete = function () {
-        console.log("obsolete");
-    }
-    //其他和离线存储有关的错误
-    applicationCache.onerror = function () {
-        console.log("error");
-    }
+        //检查到有manifest或者manifest文件//已更新就执行下载操作//即使需要缓存的文件在请求时服务器已经返回过了
+        applicationCache.ondownloading = function () {
+            console.log("ondownloading");
+            document.querySelector("#message").innerHTML += "ondownloading   <br/> ";
+        }
+
+        //返回304表示没有更新，通知浏览器直接使用本地文件
+        applicationCache.onnoupdate = function () {
+            console.log("onnoupdate");
+            document.querySelector("#message").innerHTML += "onnoupdate   <br/> ";
+        }
+
+        //下载的时候周期性的触发，可以通过它//获取已经下载的文件个数
+        applicationCache.onprogress = function () {
+            console.log("onprogress");
+            document.querySelector("#message").innerHTML += "onprogress   <br/> ";
+
+        }
+
+
+        //下载结束后，表示缓存成功(manifest不存在时 首次触发)
+        applicationCache.oncached = function () {
+            console.log("oncached");
+            document.querySelector("#message").innerHTML += "oncached    <br/> ";
+
+        }
+        //第二次载入，如果manifest被更新//在下载结束时候触发//不触发onchched   alert("本地缓存正在更新中。。。");
+        applicationCache.onupdateready = function () {
+            console.log("onupdateready");
+            document.querySelector("#message").innerHTML += "onupdateready   <br/> ";
+
+            if (confirm("是否重新载入已更新文件")) {
+                applicationCache.swapCache();
+                location.reload();
+            }
+        }
+
+        //未找到文件，返回404或者401时候触发
+        applicationCache.onobsolete = function () {
+            console.log("obsolete");
+            document.querySelector("#message").innerHTML += "obsolete";
+        }
+        //其他和离线存储有关的错误
+        applicationCache.onerror = function (e) {
+            console.log(e);
+            document.querySelector("#message").innerHTML += "error";
+        }
+
+    };
+
+
 
 
 

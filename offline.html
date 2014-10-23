@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="cache/offline.appcache">
+<html manifest="cache/offline.manifest">
 <head lang="zh-cn">
 
     <!-- 基本配置信息 -->
@@ -15,7 +15,6 @@
     <!--标题-->
     <title>离线应用展示</title>
 
-
 </head>
 <body>
 
@@ -24,10 +23,10 @@
 </body>
 
 </html>
-<script type="text/javascript" src="js/1.0.0/appcache.1.0.0.js"></script>
+<script type="text/javascript" src="js/1.0.0/appcache.1.0.0.min.js"></script>
 <script type="text/javascript">
     var  cahce =  new appCache();
-//    cahce.auto = false;
+    cahce.auto = false;
       cahce.showTxt = false;
 
     cahce.end(function(e){
