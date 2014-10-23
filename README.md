@@ -10,13 +10,13 @@ html5离线缓存 封装的进度条插件 方便使用离线缓存
 
 
 如何使用
-
-   var  cahce =  new appCache();
-    cahce.end(function(e){
+-------
+      var  cahce =  new appCache();
+      cahce.end(function(e){
         console.log("完成结束");
-    }).dowloadstart(function(){
+      }).dowloadstart(function(){
         console.log("开始下载")
-    });
+      });
 
 
 
