@@ -1,13 +1,14 @@
 CACHE MANIFEST
-#version 1.0.001
+#version 1.0.009022211
 
 
 #需要缓存的文件
 CACHE:
-../1.0.0/offline_app.js
-../images/test01.jpg
-../images/test02.jpg
-../images/test03.jpg
+
+# ../js/offline_app.js
+../img/bg.jpg
+../img/cc-font.png
+../img/cc-pic.png
 
 #不缓存的文件,每次重新拉取
 NETWORK:
