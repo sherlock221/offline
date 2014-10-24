@@ -27,4 +27,22 @@ html5离线缓存 封装的进度条插件 方便使用离线缓存
 2.删除服务器端的manifest文件<br>
 
 
+重点
+-------
+服务端配置 mime type 
+以下tomcat的
+             <mime-mapping>
+                    <extension>manifest</extension>
+                    <mime-type>text/cache-manifest</mime-type>
+             </mime-mapping>
+
+
+
+已知的bug
+----------------
+android 微信的问题  不加载manifest文件
+progress线程 下载文件 过大 造成的 回调函数堆积 导致进度条加载问题
+
+
+
 
